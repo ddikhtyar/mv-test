@@ -3,12 +3,11 @@ var express = require('express')
     ,path = require('path')
     ,errorHandler = require('errorhandler')
     ,mongoose = require('mongoose')
-    ,stylus = require('stylus')
     ,stylus = require('stylus');
 
 /*var favicon = require('serve-favicon');*/
+var env = process.env.NODE_ENV = process.env.NODE_ENV || 'development';
 var bodyParser = require('body-parser');
-
 var app = express();
 
 function compile(str,path){
@@ -16,7 +15,6 @@ function compile(str,path){
 }
 
 // all environments
-app.set('port', process.env.PORT || 3000);
 app.set('views', path.join(__dirname, '/server/views'));
 app.set('view engine', 'jade');
 
@@ -61,7 +59,8 @@ app.get('*',function(req,res){
 /*app.get('/', routes.index);
 app.get('/users', user.list);*/
 
-app.listen(app.get('port'), function(){
+var port = 3000;
+app.listen(process.env.PORT || port, function(){
     console.log('Express server listening on port ' + app.get('port'));
 });
 
