@@ -3,6 +3,7 @@ var express = require('express')
     ,path = require('path')
     ,errorHandler
     ,mongoose = require('mongoose')
+    ,favicon = require('static-favicon')
     ,stylus = require('stylus');
 
 /*var favicon = require('serve-favicon');*/
@@ -18,7 +19,6 @@ function compile(str,path){
 // development only
 if ('development' == app.get('env')) {
     errorHandler = require('errorhandler');
-    app.use(logger('dev'));
     app.use(errorHandler());
 }
 
@@ -26,7 +26,8 @@ if ('development' == app.get('env')) {
 // all environments
 app.set('views', path.join(__dirname, '/server/views'));
 app.set('view engine', 'jade');
-
+app.use(logger('dev'));
+app.use(favicon());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(stylus.middleware(
