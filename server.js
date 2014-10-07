@@ -1,7 +1,7 @@
 var express = require('express')
     ,logger = require('morgan')
     ,path = require('path')
-    ,errorHandler = require('errorhandler')
+    ,errorHandler
     ,mongoose = require('mongoose')
     ,stylus = require('stylus');
 
@@ -14,11 +14,19 @@ function compile(str,path){
     return stylus(str).set('filename',path);
 }
 
+
+// development only
+if ('development' == app.get('env')) {
+    errorHandler = require('errorhandler');
+    app.use(logger('dev'));
+    app.use(errorHandler());
+}
+
+
 // all environments
 app.set('views', path.join(__dirname, '/server/views'));
 app.set('view engine', 'jade');
 
-app.use(logger('dev'));
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 app.use(stylus.middleware(
@@ -45,10 +53,6 @@ Message.findOne().exec(function(err,messageDoc){
     console.log(messageDoc.message);
 });
 
-// development only
-if ('development' == app.get('env')) {
-    app.use(errorHandler());
-}
 
 app.get('/partials/:partialPath',function(req,res){
     res.render('partials/' + req.params.partialPath);
