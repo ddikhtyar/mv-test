@@ -1,0 +1,27 @@
+.container
+    .well
+        form.form-horizontal(name="profileForm")
+            fieldset
+                legend User prifile
+                    .form-group
+                        label.col-md-2.control-label(for="email") Email
+                        .col-md-10
+                            input.form-control(name="email", type="email", required="true", placeholder="write your e-mail here", ng-model="email")
+                    .form-group
+                        label.col-md-2.control-label(for="fname") First name
+                        .col-md-10
+                            input.form-control(name="fname", type="text", required="true", placeholder="...", ng-model="fname")
+                    .form-group
+                        label.col-md-2.control-label(for="lname") Last name
+                        .col-md-10
+                            input.form-control(name="lname", type="text", placeholder="...", ng-model="lname")
+                    .form-group
+                        label.col-md-2.control-label(for="password") Password
+                        .col-md-10
+                            input.form-control(name="password", type="password",  ng-model="password")
+                    .form-group
+                        .col-md-10.col-md-offset-2
+                            .pull-right
+                                button.btn.btn-primary(ng-click="update()", ng-disabled="profileForm.$invalid") Submit
+                                | &nbsp;
+                                a.btn.btn-default(href="/") Cansel
