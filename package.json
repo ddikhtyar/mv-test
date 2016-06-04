@@ -1,5 +1,5 @@
 {
-  "name": "my-test",
+  "name": "mv-test",
   "version": "0.0.0",
   "description": "Extrime Tech training",
   "main": "server.js",
@@ -22,7 +22,7 @@
     "body-parser": "~1.8.0",
     "passport-local": "~1.0.0",
     "passport": "~0.2.1",
-    "cookie-parser": "~1.3.3",
+    "cookie-parser": "~1.3.3"
   },
   "devDependencies": {
     "karma-mocha": "~0.1.9",
